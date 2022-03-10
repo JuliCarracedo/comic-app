@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!
     protect_from_forgery with: :null_session
-    def show
-        
+
+      def show
+        @resource = current_user
+        respond_with @resource do |format|
+          # format.html { send_data @resource.body } # => Download the image file.
+          format.json { send_data @resource.image,
+                        type: 'image/png' || 'image/jpeg',
+                        disposition: 'inline' } # => Show in browser page.
+      end
     end
 
     # def update
@@ -14,12 +21,12 @@ class UsersController < ApplicationController
     # end
 
     def upload_profile
-      if current_user.image
+      if current_user.image.attached?
         current_user.image.purge
-        current_user.image.build(:image => params[:image])
+        current_user.image.attach(params[:image])
         render json: {message: 'Profile Picture updated'}, status: :ok
       else
-        current_user.image.build(:image => params[:image])
+        current_user.image.attach(params[:image])
         render json: {message: 'Profile Picture uploaded'}, status: :ok
       end
     end

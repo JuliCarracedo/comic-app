@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
   has_one_attached :image, dependent: :destroy
   
   # Include default devise modules. Others available are:
@@ -15,6 +16,10 @@ class User < ApplicationRecord
     JWT.encode({ id: id,
                 exp: 60.days.from_now.to_i },
                Rails.application.secrets.secret_key_base)
+  end
+
+  def get_profile_link
+    url_for(self.image)
   end
 
 end

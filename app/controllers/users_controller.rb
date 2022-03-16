@@ -20,16 +20,7 @@ class UsersController < ApplicationController
     #   end
     # end
 
-    def upload_profile
-      if current_user.image.attached?
-        current_user.image.purge
-        current_user.image.attach(params[:image])
-        render json: {message: 'Profile Picture updated'}, status: :ok
-      else
-        current_user.image.attach(params[:image])
-        render json: {message: 'Profile Picture uploaded'}, status: :ok
-      end
-    end
+
 
     private
 end

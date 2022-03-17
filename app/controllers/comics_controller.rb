@@ -2,11 +2,19 @@ class ComicsController < ApplicationController
     def index 
     end
     def create 
-        newComic = current_user.comics.build(comic_params)
-        if newComic.save
-            render json: {message: 'Success'}, status: 200
+        new_comic = current_user.comics.build(comic_params)
+        if new_comic.save
+            render json: {message: 'Successfully created'}, status: 200
         else
-            render json: {error: newComic.errors}, status: 422
+            render json: {error: new_comic.errors}, status: 422
+        end
+    end
+    def update 
+        comic = Comic.find(params[:id])
+        if comic.update(comic_params)
+            render json: {message: 'Successfully updated'}, status: 200 
+        else
+            render json: {error: comic.errors}, status: 422
         end
     end
     private

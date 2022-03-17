@@ -1,4 +1,5 @@
 class ComicsController < ApplicationController
+    before_action :authenticate_user!
     def index 
     end
     def create 
@@ -16,6 +17,11 @@ class ComicsController < ApplicationController
         else
             render json: {error: comic.errors}, status: 422
         end
+    end
+    def show 
+       comic = Comic.find(params[:id])
+       render json: { comic: comic }, status: 200 if comic
+       render json: { error: {comic:["not found"]} }, status: 422 unless comic
     end
     private
 

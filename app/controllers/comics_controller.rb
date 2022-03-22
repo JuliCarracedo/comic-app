@@ -26,6 +26,17 @@ class ComicsController < ApplicationController
        render json: { comic: comic }, status: 200 if comic
        render json: { error: {comic:["not found"]} }, status: 422 unless comic
     end
+
+    def destroy 
+        comic = Comic.find(params[:id])
+        if comic
+            comic.destroy
+            render json: { message: "Successfully destroyed" }, status: 200 
+        else
+            render json: { error: {comic:["not found"]} }, status: 422 
+        end
+    end
+
     private
 
     def comic_params 

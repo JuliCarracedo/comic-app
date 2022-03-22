@@ -1,7 +1,5 @@
 class ComicsController < ApplicationController
     before_action :authenticate_user!
-    def index 
-    end
 
     def create 
         new_comic = current_user.comics.build(comic_params)
@@ -21,10 +19,18 @@ class ComicsController < ApplicationController
         end
     end
 
-    def show 
-       comic = Comic.find(params[:id])
-       render json: { comic: comic }, status: 200 if comic
-       render json: { error: {comic:["not found"]} }, status: 422 unless comic
+    def show
+
+      if params[:id]
+        redirect_to action: :index unless params[:id]
+        comic = Comic.find(params[:id])
+        render json: { comic: comic }, status: 200 if comic
+        render json: { error: {comic:["not found"]} }, status: 422 unless comic
+      else
+        comics= Comic.all
+        render json: { comics: comics }, status: 200
+      end
+
     end
 
     def destroy 

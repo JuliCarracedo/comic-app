@@ -2,6 +2,7 @@ class ComicsController < ApplicationController
     before_action :authenticate_user!
     def index 
     end
+
     def create 
         new_comic = current_user.comics.build(comic_params)
         if new_comic.save
@@ -10,6 +11,7 @@ class ComicsController < ApplicationController
             render json: {error: new_comic.errors}, status: 422
         end
     end
+
     def update 
         comic = Comic.find(params[:id])
         if comic.update(comic_params)
@@ -18,6 +20,7 @@ class ComicsController < ApplicationController
             render json: {error: comic.errors}, status: 422
         end
     end
+
     def show 
        comic = Comic.find(params[:id])
        render json: { comic: comic }, status: 200 if comic
@@ -26,6 +29,6 @@ class ComicsController < ApplicationController
     private
 
     def comic_params 
-        params.require(:title, :description)
+        params.require(:comic).permit(:title, :description)
     end
 end

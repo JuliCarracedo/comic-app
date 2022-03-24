@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resource :comics, only: [:show, :create, :update, :delete]
     resource :likes, only: [:create, :delete]
     get "/followed_comics", to: "followers#list"
+    post "/followed_comics", to: "followers#follow"
+    delete "/followed_comics", to: "followers#unfollow"
     # post 'user/upload', to: 'users#upload_profile'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

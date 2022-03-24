@@ -4,6 +4,7 @@ Rails.application.routes.draw do
                        path_names: { sign_in: :login }
     resource :users, only: [:show, :update, :delete]
     resource :comics, only: [:show, :create, :update, :delete]
+    resource :likes, only: [:create, :delete]
     get "/followed_comics", to: "followers#list"
     # post 'user/upload', to: 'users#upload_profile'
   end

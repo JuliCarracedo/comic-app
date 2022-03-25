@@ -27,6 +27,13 @@ class ChaptersController < ApplicationController
         end
     end
 
+    def destroy
+        if params[:id]
+            Comic.find(params[:id]).destroy
+            render json: {message: 'Successfully deleted'}, status: 200
+        end
+    end
+
     private
 
     def comic_params

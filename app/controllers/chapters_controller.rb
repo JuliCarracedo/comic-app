@@ -11,4 +11,26 @@ class ChaptersController < ApplicationController
 
     end
 
+    def create
+
+        page_urls = params[:page_urls] #An array of urls
+        comic = current_user.comics.build(comic_params)
+        if comic.save
+            page_urls.each do |url, index|
+                page = comic.pages.build(page_url: url, number: index + 1)
+                page.save
+            end
+
+            render json: {message: 'Successfully created'}, status: 200
+        else
+            render json: {error: comic.errors}, status: 422
+        end
+    end
+
+    private
+
+    def comic_params
+        params.require(:comic).permit(title:,:description,:thumbnail_url)
+    end
+
 end

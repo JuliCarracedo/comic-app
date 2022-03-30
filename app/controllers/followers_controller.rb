@@ -8,11 +8,13 @@ class FollowersController < ApplicationController
 
     def follow
         if Follower.find_by(user_id: current_user.id, comic_id: params[:comic_id])
-            render json: {error: "Already followed"}, status:422
+            render json: {errors: {comic: ["Already followed"]}}, status:422
         else
-            follower.new(user_id: current_user.id, comic_id: params[:comic_id])
+            follower = Follower.new(user_id: current_user.id, comic_id: params[:comic_id])
             if follower.save
                 render json: {message: "Comic Followed Successfully"}, status:200
+            else
+                render json: {errors: follower.errors}, status:422
             end
         end
     end

@@ -7,9 +7,9 @@ Rails.application.routes.draw do
       get "/followers", to: "followers#list"
       post "/follow", to: "followers#follow"
       delete "/unfollow", to: "followers#unfollow"
+      get "/likes", to: "likes#count"
     end
-    resources :likes, only: [:create, :delete]
-    
+    get "your_likes", to: "likes#your_likes"
     # post 'user/upload', to: 'users#upload_profile'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

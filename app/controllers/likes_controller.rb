@@ -19,4 +19,9 @@ class LikesController < ApplicationController
         liked_comics = current_user.likes.map{|like| like.comic}
         render json: {comics: liked_comics}, status: 200
     end
+
+    def count
+        likes = Comic.find(params[:comic_id]).likes.length
+        render json: {likes: likes}, status: 200
+    end
 end

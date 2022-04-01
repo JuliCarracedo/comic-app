@@ -1,6 +1,7 @@
 class ComicsController < ApplicationController
     before_action :authenticate_user!
-
+    protect_from_forgery with: :null_session
+    
     def create 
         new_comic = current_user.comics.build(comic_params)
         if new_comic.save

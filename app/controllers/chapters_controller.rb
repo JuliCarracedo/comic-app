@@ -37,7 +37,7 @@ class ChaptersController < ApplicationController
     private
 
     def comic_params
-        params.require(:comic).permit(title:,:description,:thumbnail_url)
+        params.require(:comic).permit(:title,:description,:thumbnail_url)
     end
 
 end

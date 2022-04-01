@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   include Rails.application.routes.url_helpers
-  has_one_attached :image, dependent: :destroy
+
+  has_many :comics
+  has_many :followers, as: :following
+  has_many :likes
+
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

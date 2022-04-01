@@ -19,17 +19,22 @@ class UsersController < ApplicationController
     #     render json: { errors: current_user.errors }, status: :unprocessable_entity
     #   end
     # end
-
-    def upload_profile
-      if current_user.image.attached?
-        current_user.image.purge
-        current_user.image.attach(params[:image])
-        render json: {message: 'Profile Picture updated'}, status: :ok
+    def update
+      if current_user.update(user_params)
+        render json: {message: "Successfully updated"}, status: 200
       else
-        current_user.image.attach(params[:image])
-        render json: {message: 'Profile Picture uploaded'}, status: :ok
+        render json: {error: current_user.errors}, status: 422
       end
     end
 
+    def delete
+      current_user.destroy
+      current_user = nil;
+      render json: {messsage: "Successfully deleted"}, status: 200
+    end
+
     private
+    def user_params
+      params.require(:user).permit(:username)
+    end
 end

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   has_many :comics, dependent: :destroy
-  has_many :followers, as: :following, dependent: :destroy
+  has_many :followers, dependent: :destroy
   has_many :likes, dependent: :destroy
 
   

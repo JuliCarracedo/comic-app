@@ -21,8 +21,7 @@ class ApplicationController < ActionController::Base
 
             rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
                 # head :unauthorized
-                render json: {error: "something went wrong"}, status: 401
-            end
+                render json: {error: "something went wrong", message: JWT.decode(token, Rails.application.secrets.secret_key_base).first}, status: 401
             end
         end
     end

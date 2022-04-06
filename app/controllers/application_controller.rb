@@ -20,8 +20,7 @@ class ApplicationController < ActionController::Base
                 @current_user_id = jwt_payload['id']
 
             rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-                # head :unauthorized
-                render json: {error: "something went wrong", message: JWT.decode(token, Rails.application.secrets.secret_key_base).first}, status: 401
+                head :unauthorized
             end
         end
     end

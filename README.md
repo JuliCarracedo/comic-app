@@ -1,24 +1,55 @@
-# README
+# Comic-App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> Read your favourite comics online! Back-End API for comic-app
 
-Things you may want to cover:
+## Built With
 
-* Ruby version
+- Major languages
+    - Ruby
+- Frameworks
+    - Rails
+- Technologies used
+    - Git & GitHub
+    - 
 
-* System dependencies
+## API Documents
 
-* Configuration
+[API Documentation](./APIDOCS.md)
 
-* Database creation
 
-* Database initialization
+## Getting Started
 
-* How to run the test suite
+To get a local copy up and running follow these simple example steps.
 
-* Services (job queues, cache servers, search engines, etc.)
+### Prerequisites
 
-* Deployment instructions
+- Ruby 3.0.1
+- Rails 6
+- Git Bash
+- A code editor
 
-* ...
+### Setup
+
+- Clone the repository by running `git clone https://github.com/JuliCarracedo/comic-app.git`
+
+### Install
+
+- Open the created folder and run `bundle install` to install all gems
+- Run `rails db:create db:migrate` to create the database and the tables
+
+### Usage
+
+- You can open the IRB console for this application using `rails c`
+
+### Deployment
+
+- Deploy the API locally using `rails s`. You can test it by using any HTTP request generator.
+
+
+## Author
+
+👤 **Julian Carracedo**
+
+- GitHub: [@JuliCarracedo](https://github.com/JuliCarracedo)
+- Twitter: [@CarracedoTrigo](https://twitter.com/CarracedoTrigo)
+- LinkedIn: [Julian Carracedo](https://linkedin.com/in/julian-carracedo)

@@ -13,12 +13,15 @@ class ApplicationController < ActionController::Base
     end
     
     def authenticate_user
+
         @jwt = headers['Authorization'].split.last if headers['Authorization'].present?
+
         @decoded_auth_token ||= JWT.decode(@jwt, Rails.application.secrets.secret_key_base)
+
         @user ||= User.find(@decoded_auth_token) if @decoded_auth_token
-        rescue ActiveRecord::RecordNotFound 
-            head :unauthorized
-        end
+
+        head :unauthorized unless @user
+
 
         # if request.headers['Authorization'].present?
         #     authenticate_or_request_with_http_token do |token|

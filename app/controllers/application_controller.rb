@@ -14,26 +14,26 @@ class ApplicationController < ActionController::Base
     
     def authenticate_user
 
-        @jwt = request.headers['Authorization'].split.last if request.headers['Authorization'].present?
+        # @jwt = request.headers['Authorization'].split.last if request.headers['Authorization'].present?
 
-        @decoded_auth_token ||= JWT.decode(@jwt, Rails.application.secrets.secret_key_base)
+        # @decoded_auth_token ||= JWT.decode(@jwt, Rails.application.secrets.secret_key_base)
 
-        @user ||= User.find(@decoded_auth_token) if @decoded_auth_token
+        # @user ||= User.find(@decoded_auth_token) if @decoded_auth_token
 
-        head :unauthorized unless @user
+        # head :unauthorized unless @user
 
 
-        # if request.headers['Authorization'].present?
-        #     authenticate_or_request_with_http_token do |token|
-        #         begin
-        #             jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base)
-        #             @current_user_id = jwt_payload
+        if request.headers['Authorization'].present?
+            authenticate_or_request_with_http_token do |token|
+                begin
+                    jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).last
+                    @current_user_id = jwt_payload
 
-        #         rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-        #             head :unauthorized
-        #         end
-        #     end
-        # end
+                rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
+                    head :unauthorized
+                end
+            end
+        end
     end
 
     def authenticate_user!(options = {})

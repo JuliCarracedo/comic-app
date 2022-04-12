@@ -1,15 +1,14 @@
 class ComicsController < ApplicationController
     protect_from_forgery with: :null_session
     before_action :authorize_request
-    
+
     def create 
-        # new_comic = @current_user.comics.build(comic_params)
-        # if new_comic.save
-        #     render json: {message: 'Successfully created'}, status: 200
-        # else
-        #     render json: {error: new_comic.errors}, status: 422
-        # end
-        render json: {user: @current_user}, status: 200
+        new_comic = @current_user.comics.build(comic_params)
+        if new_comic.save
+            render json: {message: 'Successfully created'}, status: 200
+        else
+            render json: {error: new_comic.errors}, status: 422
+        end
     end
 
     def update 

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     
     def authenticate_user
 
-        @jwt = headers['Authorization'].split.last if headers['Authorization'].present?
+        @jwt = request.headers['Authorization'].split.last if request.headers['Authorization'].present?
 
         @decoded_auth_token ||= JWT.decode(@jwt, Rails.application.secrets.secret_key_base)
 

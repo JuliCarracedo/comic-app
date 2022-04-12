@@ -4,37 +4,30 @@ class ApplicationController < ActionController::Base
     respond_to :json
     
     before_action :configure_permitted_parameters, if: :devise_controller?
-    before_action :authenticate_user
+    before_action :authorize_request
     
     private
 
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     end
+
+      def not_found
+        render json: { error: 'not_found' }
+      end
     
-    def authenticate_user
-
-        # @jwt = request.headers['Authorization'].split.last if request.headers['Authorization'].present?
-
-        # @decoded_auth_token ||= JWT.decode(@jwt, Rails.application.secrets.secret_key_base)
-
-        # @user ||= User.find(@decoded_auth_token) if @decoded_auth_token
-
-        # head :unauthorized unless @user
-
-
-        if request.headers['Authorization'].present?
-            authenticate_or_request_with_http_token do |token|
-                begin
-                    jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).last
-                    @current_user_id = jwt_payload
-
-                rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-                    head :unauthorized
-                end
-            end
+      def authorize_request
+        header = request.headers['Authorization']
+        header = header.split(' ').last if header
+        begin
+          @decoded = JsonWebToken.decode(header)
+          @current_user = User.find(@decoded[:user_id])
+        rescue ActiveRecord::RecordNotFound => e
+          render json: { errors: e.message }, status: :unauthorized
+        rescue JWT::DecodeError => e
+          render json: { errors: e.message }, status: :unauthorized
         end
-    end
+      end
 
     def authenticate_user!(options = {})
     head :unauthorized unless signed_in?

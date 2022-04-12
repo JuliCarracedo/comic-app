@@ -1,6 +1,7 @@
 class ComicsController < ApplicationController
     protect_from_forgery with: :null_session
-
+    before_action :authorize_request
+    
     def create 
         # new_comic = @current_user.comics.build(comic_params)
         # if new_comic.save

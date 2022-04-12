@@ -1,7 +1,6 @@
 class SessionsController < Devise::SessionsController
   skip_before_action :authenticate_user
-  skip_before_action :authenticate_user!
-  
+
     def create
       puts ('console check')
       puts(params)

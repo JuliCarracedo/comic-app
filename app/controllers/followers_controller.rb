@@ -1,5 +1,4 @@
 class FollowersController < ApplicationController
-    before_action :authenticate_user!
 
     def list
         followers = Follower.where(comic_id: params[:comic_id]).map{|follower| follower.comic}

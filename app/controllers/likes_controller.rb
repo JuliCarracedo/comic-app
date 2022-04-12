@@ -1,6 +1,4 @@
 class LikesController < ApplicationController
-    before_action :authenticate_user!
-
     def create 
         if params[:comic_id]
             Like.create(user_id: current_user.id, comic_id: params[:comic_id])

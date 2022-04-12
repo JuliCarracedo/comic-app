@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  skip_before_action :authorize_request, :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
     def create
       @user = User.find_by_email(params[:email])

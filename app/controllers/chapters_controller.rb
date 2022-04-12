@@ -14,7 +14,7 @@ class ChaptersController < ApplicationController
     def create
 
         page_urls = params[:page_urls] #An array of urls
-        comic = current_user.comics.build(comic_params)
+        comic = @current_user.comics.build(comic_params)
         if comic.save
             page_urls.each do |url, index|
                 page = comic.pages.build(page_url: url, number: index + 1)

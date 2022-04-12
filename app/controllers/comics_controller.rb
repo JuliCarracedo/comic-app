@@ -2,7 +2,7 @@ class ComicsController < ApplicationController
     protect_from_forgery with: :null_session
 
     def create 
-        new_comic = current_user.comics.build(comic_params)
+        new_comic = @current_user.comics.build(comic_params)
         if new_comic.save
             render json: {message: 'Successfully created'}, status: 200
         else

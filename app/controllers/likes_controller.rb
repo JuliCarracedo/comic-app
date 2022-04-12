@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
     def create 
         if params[:comic_id]
-            Like.create(user_id: current_user.id, comic_id: params[:comic_id])
+            Like.create(user_id: @current_user.id, comic_id: params[:comic_id])
             render json: {message:"You liked this comic"}, status: 200
         end
     end
@@ -14,7 +14,7 @@ class LikesController < ApplicationController
     end
 
     def your_likes 
-        liked_comics = current_user.likes.map{|like| like.comic}
+        liked_comics = @current_user.likes.map{|like| like.comic}
         render json: {comics: liked_comics}, status: 200
     end
 

@@ -13,8 +13,7 @@
     - 
 
 ## API Documents
-
-[API Documentation](./APIDOCS.md)
+> This API is publically available in Heroku. All of the information about the API and the public base URL are available  in [this document](./APIDOCS.md).
 
 
 ## Getting Started

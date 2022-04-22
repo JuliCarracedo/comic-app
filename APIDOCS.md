@@ -37,3 +37,14 @@ Otherwise you will receive a standard RoR 'errors' object.
 
 ## Comics
 
+### Create a comic
+
+- Endpoint: POST `/comics`
+- Auth Token: Required
+- Body required: 
+```
+{
+    "title": "John Doe's great adventure",
+    "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras orci risus, euismod sit amet augue nec, pellentesque imperdiet augue. Nam.",
+}
+```

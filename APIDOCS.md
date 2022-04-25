@@ -53,7 +53,7 @@ This endpoint will either create the new comic and return a copy of it upon succ
 
 ### Update a comic's title and description
 
-- Endpoint: PATCH `/comics`
+- Endpoint: PATCH `/comics/:comic_id`
 - Auth Token: Required
 - Body required: 
 ```
@@ -68,6 +68,14 @@ This endpoint will either create the new comic and return a copy of it upon succ
 ### Show a comic
 
 - Endpoint: GET `/comics/:id`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a copy of the comic with the indicated ID unless there isn't one that matches.
+
+### Destroy a comic
+
+- Endpoint: DELETE `/comics/:id`
 - Auth Token: Required
 - Body required: None
 

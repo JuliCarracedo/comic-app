@@ -2,6 +2,14 @@ class ComicsController < ApplicationController
     protect_from_forgery with: :null_session
     before_action :authorize_request
 
+    def index
+        if current_user
+            comics = current_user.comics
+
+            render json: {comics: comics}, status: 200 
+        end
+    end
+
     def create 
         new_comic = @current_user.comics.build(comic_params)
         if new_comic.save

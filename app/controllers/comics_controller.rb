@@ -3,8 +3,8 @@ class ComicsController < ApplicationController
     before_action :authorize_request
 
     def index
-        if current_user
-            comics = current_user.comics
+        if params[:user_id]
+            comics = User.find(params[:user_id]).comics
 
             render json: {comics: comics}, status: 200 
         end

@@ -46,9 +46,11 @@ class ComicsController < ApplicationController
 
     def destroy 
         comic = Comic.find(params[:id])
-        if comic
+        if comic && current_user === comic.user
             comic.destroy
             render json: { message: "Successfully destroyed" }, status: 200 
+        elsif current_user !== comic.user
+            render json: { error: {comic:["can't be deleted by anyone but its author"]} }, status: 422 
         else
             render json: { error: {comic:["not found"]} }, status: 422 
         end

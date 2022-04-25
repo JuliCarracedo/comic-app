@@ -21,10 +21,12 @@ class ComicsController < ApplicationController
 
     def update 
         comic = Comic.find(params[:id])
-        if comic.update(comic_params)
-            render json: {message: 'Successfully updated'}, status: 200 
-        else
-            render json: {error: comic.errors}, status: 422
+        if comic_params[:title] || comic_params[:description]
+            if comic.update(comic_params)
+                render json: {message: 'Successfully updated'}, status: 200 
+            else
+                render json: {error: comic.errors}, status: 422
+            end
         end
     end
 

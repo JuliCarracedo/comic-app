@@ -113,4 +113,9 @@ This endpoint will return a message confirming the disliking of the comic if it 
 - Auth Token: Required
 - Body required: None
 
-This endpoint will return a message confirming the disliking of the comic if it was possible.
+### Check your liked comics
+- Endpoint: GET `/your_likes`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a list of all liked comics.

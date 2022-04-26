@@ -119,3 +119,26 @@ This endpoint will return a message confirming the disliking of the comic if it 
 - Body required: None
 
 This endpoint will return a list of all liked comics.
+
+## Followers
+
+### Follow a comic
+- Endpoint: POST `/comics/:comic_id/follow`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a confirmation of the success of this process, or an error explaining what went wrong.
+
+### Unfollow a comic
+- Endpoint: DELETE `/comics/:comic_id/unfollow`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a confirmation of the success of this process, or an error explaining what went wrong.
+
+### Unfollow a comic
+- Endpoint: DELETE `/comics/:comic_id/unfollow`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a confirmation of the success of this process, or an error explaining what went wrong.

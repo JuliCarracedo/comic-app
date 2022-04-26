@@ -91,3 +91,19 @@ This endpoint will return a copy of the comic with the indicated ID unless there
 - Body required: None
 
 This endpoint will return a copy of the comic with the indicated ID unless there isn't one that matches.
+
+## Likes
+
+### Like a comic
+- Endpoint: POST `/comics/:comic_id/like`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a message confirming the creation of a like linked to this comic,  the absence of a comic with the given ID, or the imposibility of liking one's own comic.
+
+### Dislike a comic
+- Endpoint: DELETE `/comics/:comic_id/dislike`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a message confirming the disliking of the comic if it was possible.

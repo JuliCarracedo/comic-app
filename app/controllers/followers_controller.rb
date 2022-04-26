@@ -19,7 +19,7 @@ class FollowersController < ApplicationController
     end
     
     def unfollow
-        follow = Follower.find(params[:id])
+        follow = Follower.find_by(user_id: @current_user.id, comic_id: params[:comic_id])
 
         follow.destroy if follow
         render json: {message: "Successfully Unfollowed"}, status:200 if follow

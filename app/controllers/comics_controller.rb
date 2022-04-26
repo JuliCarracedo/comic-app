@@ -5,8 +5,13 @@ class ComicsController < ApplicationController
     def index
         if params[:user_id]
             comics = User.find(params[:user_id]).comics
-
-            render json: {comics: comics}, status: 200 
+            display_comics = comics.map do |comic| 
+                    return {id: comic.id,
+                            title: comic.title,
+                            description: comic.description,
+                            thumbnail_url: comic.thumbnail_url }
+                end
+            render json: {comics: display_comics}, status: 200 
         end
     end
 

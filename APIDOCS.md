@@ -107,3 +107,10 @@ This endpoint will return a message confirming the creation of a like linked to 
 - Body required: None
 
 This endpoint will return a message confirming the disliking of the comic if it was possible.
+
+### Check the count of likes in a comic
+- Endpoint: DELETE `/comics/:comic_id/likes`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a message confirming the disliking of the comic if it was possible.

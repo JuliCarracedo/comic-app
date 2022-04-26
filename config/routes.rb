@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       post "/follow", to: "followers#follow"
       delete "/unfollow", to: "followers#unfollow"
       get "/likes", to: "likes#count"
-      resources :likes, only: [:create, :destroy]
+      post "/like", to: "likes#create"
+      delete "/dislike", to: "likes#destroy"
     end
     get "your_likes", to: "likes#your_likes"
     # post 'user/upload', to: 'users#upload_profile'

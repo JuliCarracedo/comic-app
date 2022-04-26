@@ -1,9 +1,13 @@
 class LikesController < ApplicationController
     before_action :authorize_request
     def create 
-        if params[:comic_id]
+        if params[:comic_id] && Comic.find(:comic_id).user !== current_user
             Like.create(user_id: @current_user.id, comic_id: params[:comic_id])
             render json: {message:"You liked this comic"}, status: 200
+        elsif Comic.find(:comic_id).user === current_user
+            render json: { error: {user:["Can't like their own comic"]} }, status: 422
+        else
+            render json: { error: {something:["went wrong"]} }, status: 422
         end
     end
 

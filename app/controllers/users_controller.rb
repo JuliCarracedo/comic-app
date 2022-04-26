@@ -1,16 +1,6 @@
 class UsersController < ApplicationController
     protect_from_forgery with: :null_session
 
-      def show
-        @resource = current_user
-        respond_with @resource do |format|
-          # format.html { send_data @resource.body } # => Download the image file.
-          format.json { send_data @resource.image,
-                        type: 'image/png' || 'image/jpeg',
-                        disposition: 'inline' } # => Show in browser page.
-      end
-    end
-
     # def update
     #   if current_user.update_attributes(user_params)
     #     render :show
@@ -30,6 +20,18 @@ class UsersController < ApplicationController
       current_user.destroy
       current_user = nil;
       render json: {messsage: "Successfully deleted"}, status: 200
+    end
+
+    def show
+      if params[:id]
+        user = User.find(params[:id])
+        if user
+          display = {username: user.username, thumbnail_url: user.thumbnail_url}
+          render json: {user: display}, status: 200
+        else
+          render json: {error: {user:["not found"]}}, status: 422
+        end
+      end
     end
 
     private

@@ -24,7 +24,11 @@ class LikesController < ApplicationController
     end
 
     def your_likes 
-        liked_comics = @current_user.likes.map{|like| like.comic}
+        liked_comics = @current_user.likes.map{|like| like.comic}.map do|comic|
+                                                {title: comic.title, 
+                                                description: comic.description,
+                                                thumbnail_url: comic.thumbnail_url}
+                                            end
         render json: {comics: liked_comics}, status: 200
     end
 

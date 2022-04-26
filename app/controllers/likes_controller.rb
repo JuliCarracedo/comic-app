@@ -13,9 +13,9 @@ class LikesController < ApplicationController
 
     def destroy 
         if params[:comic_id] 
-            like = Like.where(user_id: current_user.id, comic_id: params[:comic_id])
+            like = Like.where(user_id: current_user.id, comic_id: params[:comic_id])[0]
             if like
-                like.delete
+                like.destroy
                 render json: {message:"You disliked this comic"}, status: 200
             end
         end

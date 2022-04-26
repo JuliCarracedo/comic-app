@@ -35,6 +35,17 @@ Otherwise you will receive a standard RoR 'errors' object.
 If the request is successfull, you'll receive a success message, an auth token and a copy of the user object.
 Otherwise you will receive a standard RoR 'errors' object.
 
+## User
+
+
+### Show a user
+
+- Endpoint: GET `/users/:id`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a copy of the user with the indicated ID unless there isn't one that matches.
+
 ## Comics
 
 ### Create a comic

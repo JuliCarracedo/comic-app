@@ -54,7 +54,7 @@ class ComicsController < ApplicationController
         if comic && current_user === comic.user
             comic.destroy
             render json: { message: "Successfully destroyed" }, status: 200 
-        elsif current_user !== comic.user
+        elsif current_user.id != comic.user_id
             render json: { error: {comic:["can't be deleted by anyone but its author"]} }, status: 422 
         else
             render json: { error: {comic:["not found"]} }, status: 422 

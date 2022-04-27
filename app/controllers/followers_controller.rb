@@ -2,7 +2,7 @@ class FollowersController < ApplicationController
     before_action :authorize_request
 
     def list
-        followers = Follower.where(comic_id: params[:comic_id]).map{|follower| follower.user}
+        followers = Follower.where(comic_id: params[:comic_id]).map{|follower| follower.user}.map{|user| {id: user.id, username:user.username }}
         render json: {followers: followers}, status:200
     end
 

@@ -6,7 +6,10 @@ class RegistrationsController < Devise::RegistrationsController
         if @user.valid?
             @user.save
             @current_user = @user
-            render json: {message: "successfully created", user: @user, token: @user.generate_jwt}, status: 200
+            token = JsonWebToken.encode(user_id: @user.id)
+            time = Time.now + 24.hours.to_i
+            render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
+                      user: {id: @user.id} }, status: :ok
         else
             render json: {errors: @user.errors}, status: 401
         end

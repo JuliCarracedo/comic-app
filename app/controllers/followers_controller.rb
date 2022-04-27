@@ -1,7 +1,8 @@
 class FollowersController < ApplicationController
     before_action :authorize_request
+
     def list
-        followers = Follower.where(comic_id: params[:comic_id]).map{|follower| follower.comic}
+        followers = Follower.where(comic_id: params[:comic_id]).map{|follower| follower.user}.map{|user| {id: user.id, username:user.username }}
         render json: {followers: followers}, status:200
     end
 
@@ -19,7 +20,7 @@ class FollowersController < ApplicationController
     end
     
     def unfollow
-        follow = Follower.find(params[:id])
+        follow = Follower.find_by(user_id: @current_user.id, comic_id: params[:comic_id])
 
         follow.destroy if follow
         render json: {message: "Successfully Unfollowed"}, status:200 if follow

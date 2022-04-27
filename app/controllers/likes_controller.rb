@@ -25,7 +25,7 @@ class LikesController < ApplicationController
 
     def your_likes 
         liked_comics = @current_user.likes.map{|like| like.comic}.map do|comic|
-                                                {id: comic.id
+                                                {id: comic.id,
                                                 title: comic.title, 
                                                 description: comic.description,
                                                 thumbnail_url: comic.thumbnail_url}

@@ -142,3 +142,10 @@ This endpoint will return a confirmation of the success of this process, or an e
 - Body required: None
 
 This endpoint will return a confirmation of the success of this process, or an error explaining what went wrong.
+
+### Followers
+- Endpoint: DELETE `/comics/:comic_id/followers`
+- Auth Token: Required
+- Body required: None
+
+This endpoint will return a simplified array of all users that follow this comic.

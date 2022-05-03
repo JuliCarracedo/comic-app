@@ -7,7 +7,7 @@ class SessionsController < Devise::SessionsController
         token = JsonWebToken.encode(user_id: @user.id)
         time = Time.now + 24.hours.to_i
         render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"),
-                      user: {id: @user.id}, message: "Successfully Logged In" }, status: :ok
+                      user: {id: @user.id, username: user.username}, message: "Successfully Logged In" }, status: :ok
       else
         render json: { errors: {wrong:["email or password"]}}, status: :unauthorized
       end

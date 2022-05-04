@@ -12,7 +12,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true, uniqueness: true, length: {max: 20}, allow_blank: false,
-  validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i}
+  validates :email, presence: true, uniqueness: true
   validates :password, presence: true, length: {in: 6...20}
 
 
@@ -25,15 +25,22 @@ class User < ApplicationRecord
   end
 
   def password_format
-    unless /[a-z]/
+    unless password.match(/[a-z]/)
       errors.add(:password, "Must contain one or more lowercase letters");
     end
-    unless /[A-Z]/
+    unless password.match(/[A-Z]/)
       errors.add(:password, "Must contain one or more uppercase letters");
     end
-    unless /[0-9]/
+    unless password.match(/[0-9]/)
       errors.add(:password, "Must contain one or more numbers");
     end
   end
+
+  def email_format 
+    unless email.match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+      errors.add(:email, "Must follow the 'example@example.com' format");
+    end
+  end
+  
 
 end

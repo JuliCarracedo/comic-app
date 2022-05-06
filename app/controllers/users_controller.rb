@@ -26,8 +26,7 @@ class UsersController < ApplicationController
       if params[:id]
         user = User.find(params[:id])
         if user
-          display = {id: user.id, username: user.username, thumbnail_url: user.thumbnail_url}
-          render json: {user: display}, status: 200
+          render json: {user: user}, status: 200
         else
           render json: {error: {user:["not found"]}}, status: 422
         end

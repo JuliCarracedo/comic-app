@@ -2,12 +2,16 @@ class UsersController < ApplicationController
     protect_from_forgery with: :null_session
 
     def update
-      
-      if current_user.update()
-        current_user.profile.attach(params[:avatar]) if params[:avatar]
-        render json: {message: "Successfully updated", user: {profile_url: cloudinary_url(user.profile.key, width: 100, height: 100)}}, status: 200
+      if params[:id] && current_user.id === params[:id]
+        user = User.find(params[:id]).update()
+        if 
+          user.profile.attach(params[:avatar]) if params[:avatar]
+          render json: {message: "Successfully updated", user: {profile_url: cloudinary_url(user.profile.key, width: 100, height: 100)}}, status: 200
+        else
+          render json: {error: user.errors}, status: 422
+        end
       else
-        render json: {error: current_user.errors}, status: 422
+        render json: {error: {user: ["can't be updated by you"]}}, status: 422
       end
     end
 

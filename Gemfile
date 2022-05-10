@@ -9,6 +9,8 @@ gem 'devise'
 gem 'jwt'
 gem 'rack-cors'
 gem 'cloudinary'
+gem "image_processing", ">= 1.2"
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.6'

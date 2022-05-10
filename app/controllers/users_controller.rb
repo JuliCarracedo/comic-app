@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     def update
       if current_user.update(user_params)
         current_user.profile.attach(user_params[:avatar]) if user_params[:avatar]
-        render json: {message: "Successfully updated"}, status: 200
+        render json: {message: "Successfully updated", user: {...current_user, profile_url: cloudinary_url(user.avatar.key, width: 100, height: 100)}}, status: 200
       else
         render json: {error: current_user.errors}, status: 422
       end
@@ -35,6 +35,7 @@ class UsersController < ApplicationController
     end
 
     private
+
     def user_params
       params.require(:user).permit(:username)
     end

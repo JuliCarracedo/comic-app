@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :comics, dependent: :destroy
   has_many :followers, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_one_attached :profile
   validate :password_format
   
   # Include default devise modules. Others available are:
@@ -18,10 +19,6 @@ class User < ApplicationRecord
 
   def generate_jwt
     JWT.encode(id,Rails.application.secrets.secret_key_base)
-  end
-
-  def get_profile_link
-    url_for(self.image)
   end
 
   def password_format

@@ -16,9 +16,14 @@ class UsersController < ApplicationController
     end
 
     def delete
-      current_user.destroy
-      current_user = nil;
-      render json: {messsage: "Successfully deleted"}, status: 200
+      if params[:id] && current_user.id === params[:id]
+        user = User.find(params[:id])
+        user.destroy
+        current_user = nil
+        render json: {messsage: "Successfully deleted"}, status: 200
+      else
+        render json: {error: {user: ["can't be deleted by you"]}}, status: 422
+      end
     end
 
     def show

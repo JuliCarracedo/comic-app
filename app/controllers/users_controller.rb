@@ -3,9 +3,16 @@ class UsersController < ApplicationController
 
     def update
       if params[:id] && current_user.id === params[:id]
-        user = User.find(params[:id]).update()
-        if 
-          user.profile.attach(params[:avatar]) if params[:avatar]
+        user = User.find(params[:id])
+        vars = {}
+        vars.merge(username: params[:username]) if params[:username]
+        vars.merge(email: params[:email]) if params[:email]
+        vars.merge(password: params[:password]) if params[:password]
+        if params[:profile]
+          user.profile.purge
+          user.profile.attach(params[:profile])
+        end
+        if user.update(vars)
           render json: {message: "Successfully updated", user: {profile_url: cloudinary_url(user.profile.key, width: 100, height: 100)}}, status: 200
         else
           render json: {error: user.errors}, status: 422

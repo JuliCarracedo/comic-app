@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       if params[:id]
         user = User.find(params[:id])
         if user
-          render json: {user: user}, status: 200
+          render json: {user: {...user, profile_url: cloudinary_url(user.avatar.key, width: 100, height: 100)}}, status: 200
         else
           render json: {error: {user:["not found"]}}, status: 422
         end

@@ -22,20 +22,24 @@ class User < ApplicationRecord
   end
 
   def password_format
-    unless password.match(/[a-z]/)
-      errors.add(:password, "Must contain one or more lowercase letters");
-    end
-    unless password.match(/[A-Z]/)
-      errors.add(:password, "Must contain one or more uppercase letters");
-    end
-    unless password.match(/[0-9]/)
-      errors.add(:password, "Must contain one or more numbers");
+    if password
+      unless password.match(/[a-z]/)
+        errors.add(:password, "Must contain one or more lowercase letters");
+      end
+      unless password.match(/[A-Z]/)
+        errors.add(:password, "Must contain one or more uppercase letters");
+      end
+      unless password.match(/[0-9]/)
+        errors.add(:password, "Must contain one or more numbers");
+      end
     end
   end
 
   def email_format 
-    unless email.match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
-      errors.add(:email, "Must follow the 'example@example.com' format");
+    if email
+      unless email.match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+        errors.add(:email, "Must follow the 'example@example.com' format");
+      end
     end
   end
   

@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     # end
     def update
       if current_user.update(user_params)
+        current_user.profile.attach(user_params[:avatar]) if user_params[:avatar]
         render json: {message: "Successfully updated"}, status: 200
       else
         render json: {error: current_user.errors}, status: 422

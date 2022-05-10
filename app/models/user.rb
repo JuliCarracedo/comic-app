@@ -5,16 +5,20 @@ class User < ApplicationRecord
   has_many :followers, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_one_attached :profile
-  validate :password_format
+  validate :password_format, :email_format
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, presence: true, uniqueness: true, length: {max: 20}, allow_blank: false
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: {in: 6...20}
+  validates :username, uniqueness: true, length: {max: 20}
+  validates :email, uniqueness: true
+  validates :password, length: {in: 6...20}
+  # Validate presence on create
+  validates :pasword, presence: true, on: :create
+  validates :username, presence: true, on: :create
+  validates :email, presence: true, on: :create
 
 
   def generate_jwt

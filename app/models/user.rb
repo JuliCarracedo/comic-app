@@ -12,7 +12,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, uniqueness: true, length: {max: 20}
+  validates :username, uniqueness: true, length: {maximum: 20}
   validates :email, uniqueness: true
   validates :password, length: {in: 6...20}
   # Validate presence on create

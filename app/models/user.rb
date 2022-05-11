@@ -12,9 +12,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, uniqueness: true, length: {maximum: 20}, presence: true
-  validates :email, uniqueness: true, presence: true
-  validates :password, length: {in: 6...20}, presence: true
+  validates :username, uniqueness: true, length: {maximum: 20}, presence: true, on: [:create, :update]
+  validates :email, uniqueness: true, presence: true, on: [:create, :update]
+  validates :password, length: {in: 6...20}, presence: true, on: [:create, :update]
 
   def generate_jwt
     JWT.encode(id,Rails.application.secrets.secret_key_base)

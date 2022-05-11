@@ -10,6 +10,7 @@ gem 'jwt'
 gem 'rack-cors'
 gem 'cloudinary'
 gem "image_processing", ">= 1.2"
+gem 'activestorage'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'

@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
     devise_for :users, controllers: { sessions: :sessions, registrations: :registrations },
                        path_names: { sign_in: :login }
-    resources :users, only: [:show, :update, :destroy] do
+    resources :users, only: [:show,:destroy, :update] do
       get "/comics", to: "comics#index"
+      post "/update_profile", to: "users#update_profile"
     end
     resources :comics, only: [:show, :create, :update, :destroy] do
       get "/followers", to: "followers#list"

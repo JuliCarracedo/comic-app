@@ -8,6 +8,7 @@ test:
 
 cloudinary:      
   service: Cloudinary
+  folder: comic-app
   
   # Any other settings you want, to be sent on all requests, can be included here as well.
 
